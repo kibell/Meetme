@@ -1,25 +1,22 @@
-# Name of Project
+#Let's Meet
 
 > [Live Site](Put the deployed link here once you have it)
 
 ## Project Summary
 
-> Describe the problem or mission statement of the project in 2 - 3 sentences.
+> Have you ever wanted to meet a coworker for lunch and had trouble finding a place to meet? With Let's Meet you can link with your friends and coworkers on this app. Each user will enter in their Zip code and Let's meet will find the closest resturants near you and will give each user the option to vote on which place to go. 
 
 ## Developers
 
-- Developer 1: Role
+- Developer 1: Dipti Katkar
   - Portfolio
   - Github
   - LinkedIn
-- Developer 2: Role
+- Developer 2: Kitrick Bell
   - Portfolio
   - Github
   - LinkedIn
-- Developer 3: Role
-  - Portfolio
-  - Github
-  - LinkedIn
+
 
 ## Animated Gifs/Pictures of App
 
