@@ -1,11 +1,12 @@
 .logo
 {
-    width: 120px;
+    width: 50px;
 }
 
 .display-4, .lead{
 
 text-align: center;
+opacity: 1;
 
 }
 .jumbotron-fluid{
@@ -13,7 +14,20 @@ background: linear-gradient(to right, white, orange);
 opacity: .9;
 
 }
-.collapse{
+.lead{
+    opacity: 1;
+    color: orangered;   
+    font-family: 'ZCOOL XiaoWei', serif;
+    
+}
 
 
+
+.sign{
+
+    color: white;   
+    font-family: 'ZCOOL XiaoWei', serif;
+    text-align: center;
+    margin-top: 50px;
+    font-weight: bolder;
 }
