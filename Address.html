@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="addressStyle.css">
   <link href="https://fonts.googleapis.com/css?family=Mansalva|ZCOOL+XiaoWei&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <title>Document</title>
@@ -37,14 +37,30 @@
     
     <div class="container">
         
-      
-      <h1 class="display-4"><img src="assest/images/logo.png"></h1>
-      <p class="lead" style="font-size: 25px;">Connect, Share, Experience</p>
+      <div class="row">
+      <h1 class="display-4 col-md-4 "><img src="assest/images/logo.png"></h1>
+      <div>
+      <div class="form-group col-md-8">
+            <label for="exampleFormControlTextarea1">Messaage</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="7" style="width: 550px;"> 
+                Your Text will be displayed here
+            </textarea>
+          </div>
+      <div class="input-group ">
+            <input type="text" class="form-control" placeholder="Say Hey!" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button class="btn btn-secondary" type="button">Send Messaage</button>
+            </div>
+          </div>
     </div>
   </div>
-  
+  </div>
+  </div>
 </head>
+
 <body background = "assest/images/background.jpg">
+
+   
   
   <div class="container" style=" height:400px ;">
 
@@ -81,19 +97,16 @@
 </div> 
     <form class="col-md-6" style="background: aliceblue;margin-bottom: 100px; border-style:solid; border-width: 10px; border-color: blue;">
       <div class="form-group " style="margin-top: 35px; ;  ">
-        <label for="exampleInputEmail1">Where are you Located?</label>
-        <input type="input" nclass="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-        <small id="emailHelp" class="form-text text-muted">Enter you ZIP Code</small>
+        <label for="input">Where are you Located?</label>
+        <input type="input" nclass="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Zip Code">
+        <small id="emailHelp" class="form-text text-muted"></small>
       </div>
       <div class="form-group">
-        <label for="exampleInputPassword1">Enter your Zip Code</label>
-        <input type="input" class="form-control" id="exampleInputPassword1" placeholder="">
+        <label for="input">Enter your Zip Code</label>
+        <input type="input" class="form-control" id="exampleInputPassword1" placeholder="Enter Zip">
       </div>
-      <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Remember Me</label>
-      </div>
-      <button type="submit" class="btn btn-primary" style="margin-bottom: 25px;">Login</button>
+      
+      <button  class="btn btn-primary" style="margin-bottom: 25px;">Find Location</button>
     </form>
   </div>
 
