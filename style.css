@@ -2,3 +2,18 @@
 {
     width: 120px;
 }
+
+.display-4, .lead{
+
+text-align: center;
+
+}
+.jumbotron-fluid{
+background: linear-gradient(to right, white, orange);
+opacity: .9;
+
+}
+.collapse{
+
+
+}
