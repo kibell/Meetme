@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="addressStyle.css">
   <link href="https://fonts.googleapis.com/css?family=Mansalva|ZCOOL+XiaoWei&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="app.js"></script>
   <title>Document</title>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" style="opacity: .9;">
       <a class="navbar-brand" href="index.html"><img src="assest/images/logonav.png" class ="logo">   </a>
@@ -81,32 +82,59 @@
                   </style>
                 </head>
                 <body>
+                    <div id="floating-panel">
+                        <strong>Start:</strong>
+                        
+                        <br>
+                        
+                      </div>
+                      
                   <div id="map"></div>
-                  <script>
-                    var map;
-                    function initMap() {
-                      map = new google.maps.Map(document.getElementById('map'), {
-                        center: {lat: -34.397, lng: 150.644},
-                        zoom: 8
-                      });
-                    }
-                  </script>
-                   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCM2ChWHyTWpo5OJQFdiI-4tLDFUugVc7Q
-                   &callback=initMap"
-                   async defer></script>
+                
+                  
+                  
 </div> 
     <form class="col-md-6" style="background: aliceblue;margin-bottom: 100px; border-style:solid; border-width: 10px; border-color: blue;">
       <div class="form-group " style="margin-top: 35px; ;  ">
         <label for="input">Where are you Located?</label>
-        <input type="input" nclass="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Zip Code">
+        <select id="start">
+            <option value="chicago, il">Chicago</option>
+            <option value="st louis, mo">St Louis</option>
+            <option value="joplin, mo">Joplin, MO</option>
+            <option value="oklahoma city, ok">Oklahoma City</option>
+            <option value="amarillo, tx">Amarillo</option>
+            <option value="gallup, nm">Gallup, NM</option>
+            <option value="flagstaff, az">Flagstaff, AZ</option>
+            <option value="winona, az">Winona</option>
+            <option value="kingman, az">Kingman</option>
+            <option value="barstow, ca">Barstow</option>
+            <option value="san bernardino, ca">San Bernardino</option>
+            <option value="los angeles, ca">Los Angeles</option>
+          </select>
+      </input>
         <small id="emailHelp" class="form-text text-muted"></small>
       </div>
       <div class="form-group">
         <label for="input">Enter your Zip Code</label>
-        <input type="input" class="form-control" id="exampleInputPassword1" placeholder="Enter Zip">
+        <strong></strong>
+                        <select id="end">
+                          <option value="houston, tx">Houston</option>
+                          <option value="st louis, mo">St Louis</option>
+                          <option value="joplin, mo">Joplin, MO</option>
+                          <option value="oklahoma city, ok">Oklahoma City</option>
+                          <option value="amarillo, tx">Amarillo</option>
+                          <option value="gallup, nm">Gallup, NM</option>
+                          <option value="flagstaff, az">Flagstaff, AZ</option>
+                          <option value="winona, az">Winona</option>
+                          <option value="kingman, az">Kingman</option>
+                          <option value="barstow, ca">Barstow</option>
+                          <option value="san bernardino, ca">San Bernardino</option>
+                          <option value="los angeles, ca">Los Angeles</option>
+                        </select>
       </div>
       
       <button  class="btn btn-primary" style="margin-bottom: 25px;">Find Location</button>
+
     </form>
   </div>
 
@@ -121,5 +149,13 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCM2ChWHyTWpo5OJQFdiI-4tLDFUugVc7Q&callback=initMap"
+async defer></script>
+
+
+
+
+
+
 </body>
 </html>
