@@ -1,12 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+<html>
+  <head>
+    <style>
+       /* Set the size of the div element that contains the map */
+      #map {
+        height: 400px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+       }
+    </style>
+  </head>
+  <body>
+    <h3>Restaurant app</h3>
+    <!--The div element for the map -->
+    <button id="calculate-distance">  Calculate Distance</button>
+    <div id="map" style="float:left;width:70%; height:100%"></div>
+    <div id="directionsPanel" style="float:right;width:30%;height:100%"></div>
     
-</body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+// Initialize and add the map
+
+$("#calculate-distance").on("click", function(event){
+
+
+function initMap() {
+
+    var directionsService = new google.maps.DirectionsService();
+  var directionsRenderer = new google.maps.DirectionsRenderer();
+  var chicago = new google.maps.LatLng(41.850033, -87.6500523);
+  var mapOptions = {
+    zoom:7,
+    center: chicago
+  }
+  var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+  directionsRenderer.setMap(map);
+  directionsRenderer.setPanel(document.getElementById('directionsPanel'));
+}
+
+function calcRoute() {
+  var start = document.getElementById('start').value;
+  var end = document.getElementById('end').value;
+  var request = {
+    origin:start,
+    destination:end,
+    travelMode: 'DRIVING'
+  };
+  directionsService.route(request, function(response, status) {
+    if (status == 'OK') {
+      directionsRenderer.setDirections(response);
+    }
+  });
+
+}
+});
+    </script>
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+    
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCM2ChWHyTWpo5OJQFdiI-4tLDFUugVc7Q&callback=initMap">
+    </script>
+  </body>
 </html>
