@@ -183,31 +183,37 @@ async defer></script>
   let chatlog = 0; 
   $("#send").on("click", function(event) {
 
-    console.log("button")
+    
     // prevent form from trying to submit/refresh the page
     event.preventDefault();
     
     let chat = $("#chatbox").val().trim()
     // Capture User Inputs and store them into variables
-    
+    console.log(chat)
     let chatp = $("<p>");
 
       chatp.attr("id", "item-" + chatlog);
       chatp.text(chat);
    
-      $('#chatArea').append(chatp);
+      // $('#chatArea').append(chatp);
     // Console log each of the user inputs to confirm we are receiving them
     
     
       chatlog ++;
     // Output all of the new information into the relevant HTML sections
    
-    database.ref().set({
-   chat:chat
+
+    database.ref().push({
+   chat
+
+  });
+      
 
   });
 
-  database.ref().on("value", function(snapshot) {
+  
+
+  database.ref().on("child_added", function(snapshot) {
 
 // Print the initial data to the console.
 console.log(snapshot.val());
@@ -217,15 +223,22 @@ console.log(snapshot.val().chat);
 
 
 // Change the HTML
-$('#chatArea').append(chatp);
+// $('#chatArea').text(snapshot.val().chat);
+
+let newRow = $('<p>')
+
+  let chat = $('<p>').text(snapshot.val().chat)
+  
+
+  $("#chatArea").append(chat)
 
 // If any errors are experienced, log them to console.
 }, function(errorObject) {
 console.log("The read failed: " + errorObject.code);
 });
 
-$('#chatbox').val("")
-});
+
+
 </script>
 
 </body>
