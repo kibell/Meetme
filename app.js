@@ -23,13 +23,13 @@ function initMap() {
     control.style.display = 'block';
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
     
-    let onChangeHandler = function() {
+    /* let onChangeHandler = function() {
       calculateAndDisplayRoute(directionsService, directionsRenderer);
       
     };
     document.getElementById('start').addEventListener('change', onChangeHandler);
     document.getElementById('end').addEventListener('change', onChangeHandler);
-  
+   */
   function calculateAndDisplayRoute(directionsService, directionsRenderer) {
     let start = document.getElementById('start').value;
     let end = document.getElementById('end').value;
@@ -78,13 +78,15 @@ function geocodeAddress(geocoder, resultsMap) {
 
 }
 
+});
 
-
-
-
-
+//add a function that gets triggered on click of "Go" button, to get directions between start and end 
+document.getElementById('get-directions').addEventListener('click', function(){
+  
+  calculateAndDisplayRoute(directionsService, directionsRenderer);
 
 });
+
 
 });
 }
