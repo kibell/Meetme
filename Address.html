@@ -44,8 +44,8 @@
       <h1 class="display-4 col-md-4 "><img src="assest/images/logo.png"></h1>
       <div>
       <div class="form-group col-md-8">
-            <label for="exampleFormControlTextarea1">Messaage</label>
-            <div  id="chatArea" rows="7" style="width: 550px; Background : aliceblue; "> 
+            <label for="exampleFormControlTextarea1">Messaage Center</label>
+            <div  id="chatArea" rows="7" style="width: 550px;  Background : aliceblue; "> 
               
             </div>
           </div>
@@ -182,7 +182,7 @@ async defer></script>
   let chat = "";
   let chatlog = 0; 
   $("#send").on("click", function(event) {
-
+    
     
     // prevent form from trying to submit/refresh the page
     event.preventDefault();
@@ -202,16 +202,16 @@ async defer></script>
       chatlog ++;
     // Output all of the new information into the relevant HTML sections
    
-
     database.ref().push({
    chat
 
   });
-      
+ 
 
   });
 
   
+  $('#chatbox').text("");
 
   database.ref().on("child_added", function(snapshot) {
 
