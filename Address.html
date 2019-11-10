@@ -7,6 +7,9 @@
   <link rel="stylesheet" href="addressStyle.css">
   <link href="https://fonts.googleapis.com/css?family=Mansalva|ZCOOL+XiaoWei&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="app.js"></script>
+  
   <title>Document</title>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" style="opacity: .9;">
       <a class="navbar-brand" href="index.html"><img src="assest/images/logonav.png" class ="logo">   </a>
@@ -42,14 +45,14 @@
       <div>
       <div class="form-group col-md-8">
             <label for="exampleFormControlTextarea1">Messaage</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="7" style="width: 550px;"> 
-                Your Text will be displayed here
-            </textarea>
+            <div  id="chatArea" rows="7" style="width: 550px; Background : aliceblue; "> 
+              
+            </div>
           </div>
       <div class="input-group ">
-            <input type="text" class="form-control" placeholder="Say Hey!" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <input type="text" class="form-control" placeholder="Say Hey!"  id="chatbox" aria-label="Recipient's username" aria-describedby="basic-addon2">
             <div class="input-group-append">
-              <button class="btn btn-secondary" type="button">Send Messaage</button>
+              <button class="btn btn-secondary" type="button" id="send" >Send Messaage</button>
             </div>
           </div>
     </div>
@@ -81,32 +84,50 @@
                   </style>
                 </head>
                 <body>
-                  <div id="map"></div>
-                  <script>
-                    var map;
-                    function initMap() {
-                      map = new google.maps.Map(document.getElementById('map'), {
-                        center: {lat: -34.397, lng: 150.644},
-                        zoom: 8
-                      });
-                    }
-                  </script>
-                   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCM2ChWHyTWpo5OJQFdiI-4tLDFUugVc7Q
-                   &callback=initMap"
-                   async defer></script>
+                    <div id="map"> </div>
+                
+                  
+                  
 </div> 
     <form class="col-md-6" style="background: aliceblue;margin-bottom: 100px; border-style:solid; border-width: 10px; border-color: blue;">
-      <div class="form-group " style="margin-top: 35px; ;  ">
-        <label for="input">Where are you Located?</label>
-        <input type="input" nclass="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Zip Code">
-        <small id="emailHelp" class="form-text text-muted"></small>
-      </div>
-      <div class="form-group">
-        <label for="input">Enter your Zip Code</label>
-        <input type="input" class="form-control" id="exampleInputPassword1" placeholder="Enter Zip">
-      </div>
+        <div id="floating-panel">
+            <strong>Start:</strong>
+            <select id="start">
+              <option value="chicago, il">Chicago</option>
+              <option value="st louis, mo">St Louis</option>
+              <option value="joplin, mo">Joplin, MO</option>
+              <option value="oklahoma city, ok">Oklahoma City</option>
+              <option value="amarillo, tx">Amarillo</option>
+              <option value="gallup, nm">Gallup, NM</option>
+              <option value="flagstaff, az">Flagstaff, AZ</option>
+              <option value="winona, az">Winona</option>
+              <option value="kingman, az">Kingman</option>
+              <option value="barstow, ca">Barstow</option>
+              <option value="san bernardino, ca">San Bernardino</option>
+              <option value="los angeles, ca">Los Angeles</option>
+            </select>
+            <br>
+            <strong>End:</strong>
+            <select id="end">
+              <option value="chicago, il">Chicago</option>
+              <option value="st louis, mo">St Louis</option>
+              <option value="joplin, mo">Joplin, MO</option>
+              <option value="oklahoma city, ok">Oklahoma City</option>
+              <option value="amarillo, tx">Amarillo</option>
+              <option value="gallup, nm">Gallup, NM</option>
+              <option value="flagstaff, az">Flagstaff, AZ</option>
+              <option value="winona, az">Winona</option>
+              <option value="kingman, az">Kingman</option>
+              <option value="barstow, ca">Barstow</option>
+              <option value="san bernardino, ca">San Bernardino</option>
+              <option value="los angeles, ca">Los Angeles</option>
+            </select>
+          </div>
+          <div id="right-panel"></div>
+          <input id="inputTest"></input>
       
-      <button  class="btn btn-primary" style="margin-bottom: 25px;">Find Location</button>
+          <button type="button" class="btn btn-primary" id = "findLocation">Find Location</button>
+
     </form>
   </div>
 
@@ -118,8 +139,107 @@
 
 
 
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+ 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCM2ChWHyTWpo5OJQFdiI-4tLDFUugVc7Q&callback=initMap"
+
+async defer></script>
+
+<script src="https://maps.googleapis.com/maps/api/geocode/json?address=77064&key=AIzaSyCM2ChWHyTWpo5OJQFdiI-4tLDFUugVc7Q"></script>
+
+
+
+<!--   Chat Firebase          -->
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-database.js"></script>
+
+
+<script>
+  // Your web app's Firebase configuration
+  let firebaseConfig = {
+    apiKey: "AIzaSyCr8NJ39kbBjwpyrP2CF2dJutZJV7YLxA0",
+    authDomain: "test-8ce30.firebaseapp.com",
+    databaseURL: "https://test-8ce30.firebaseio.com",
+    projectId: "test-8ce30",
+    storageBucket: "test-8ce30.appspot.com",
+    messagingSenderId: "90944581488",
+    appId: "1:90944581488:web:b2333a4c6608efbcc269b5",
+    measurementId: "G-DVPWG9ER12"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+
+  const database = firebase.database();
+
+  let chat = "";
+  let chatlog = 0; 
+  $("#send").on("click", function(event) {
+
+    
+    // prevent form from trying to submit/refresh the page
+    event.preventDefault();
+    
+    let chat = $("#chatbox").val().trim()
+    // Capture User Inputs and store them into variables
+    console.log(chat)
+    let chatp = $("<p>");
+
+      chatp.attr("id", "item-" + chatlog);
+      chatp.text(chat);
+   
+      // $('#chatArea').append(chatp);
+    // Console log each of the user inputs to confirm we are receiving them
+    
+    
+      chatlog ++;
+    // Output all of the new information into the relevant HTML sections
+   
+
+    database.ref().push({
+   chat
+
+  });
+      
+
+  });
+
+  
+
+  database.ref().on("child_added", function(snapshot) {
+
+// Print the initial data to the console.
+console.log(snapshot.val());
+
+// Log the value of the various properties
+console.log(snapshot.val().chat);
+
+
+// Change the HTML
+// $('#chatArea').text(snapshot.val().chat);
+
+let newRow = $('<p>')
+
+  let chat = $('<p>').text(snapshot.val().chat)
+  
+
+  $("#chatArea").append(chat)
+
+// If any errors are experienced, log them to console.
+}, function(errorObject) {
+console.log("The read failed: " + errorObject.code);
+});
+
+
+
+</script>
+
 </body>
 </html>
