@@ -45,9 +45,9 @@
       <div>
       <div class="form-group col-md-8">
             <label for="exampleFormControlTextarea1">Messaage</label>
-            <textarea class="form-control" id="chatArea" rows="7" style="width: 550px;"> 
+            <div  id="chatArea" rows="7" style="width: 550px; Background : aliceblue; "> 
               
-            </textarea>
+            </div>
           </div>
       <div class="input-group ">
             <input type="text" class="form-control" placeholder="Say Hey!"  id="chatbox" aria-label="Recipient's username" aria-describedby="basic-addon2">
@@ -178,30 +178,53 @@ async defer></script>
   firebase.analytics();
 
   const database = firebase.database();
-  let chat = "";
 
+  let chat = "";
+  let chatlog = 0; 
   $("#send").on("click", function(event) {
 
     console.log("button")
     // prevent form from trying to submit/refresh the page
     event.preventDefault();
-    let chatDiv = $("<div>");
+    
     let chat = $("#chatbox").val().trim()
     // Capture User Inputs and store them into variables
     
-    chatDiv.text(chat)
-   
+    let chatp = $("<p>");
 
+      chatp.attr("id", "item-" + chatlog);
+      chatp.text(chat);
+   
+      $('#chatArea').append(chatp);
     // Console log each of the user inputs to confirm we are receiving them
     
     
-
+      chatlog ++;
     // Output all of the new information into the relevant HTML sections
-    $("#chatArea").text(chatDiv);
+   
     database.ref().set({
    chat:chat
 
   });
+
+  database.ref().on("value", function(snapshot) {
+
+// Print the initial data to the console.
+console.log(snapshot.val());
+
+// Log the value of the various properties
+console.log(snapshot.val().chat);
+
+
+// Change the HTML
+$('#chatArea').append(chatp);
+
+// If any errors are experienced, log them to console.
+}, function(errorObject) {
+console.log("The read failed: " + errorObject.code);
+});
+
+$('#chatbox').val("")
 });
 </script>
 
