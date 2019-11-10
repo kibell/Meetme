@@ -88,26 +88,14 @@ function geocodeAddress(geocoder, resultsMap) {
 
 });
 }
+ 
 
-//   $('#findLocation').click(function() {
-//       console.log("hey")
-//   function geocodeAddress(geocoder, resultsMap) {
-//     let address = document.getElementById('start').value;
-//     geocoder.geocode({'start': address}, function(results, status) {
-//       if (status === 'OK') {
-//         console.log(results[0].geometry.location);
-//         let marker = new google.maps.Marker({
-//           map: resultsMap,
-//           position: results[0].geometry.location
-//         });
-//       } else {
-//         alert('Geocode was not successful for the following reason: ' + status);
-//       }
-//     });
-//   }
+// chat function //
 
-//   });
+ 
+
+// Create a variable to reference the database
 
 
 
-  
+// $( document).ready(function(){

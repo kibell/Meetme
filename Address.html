@@ -45,14 +45,14 @@
       <div>
       <div class="form-group col-md-8">
             <label for="exampleFormControlTextarea1">Messaage</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="7" style="width: 550px;"> 
-                Your Text will be displayed here
-            </textarea>
+            <div  id="chatArea" rows="7" style="width: 550px; Background : aliceblue; "> 
+              
+            </div>
           </div>
       <div class="input-group ">
-            <input type="text" class="form-control" placeholder="Say Hey!" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <input type="text" class="form-control" placeholder="Say Hey!"  id="chatbox" aria-label="Recipient's username" aria-describedby="basic-addon2">
             <div class="input-group-append">
-              <button class="btn btn-secondary" type="button">Send Messaage</button>
+              <button class="btn btn-secondary" type="button" id="send" >Send Messaage</button>
             </div>
           </div>
     </div>
@@ -150,9 +150,96 @@ async defer></script>
 
 
 
+<!--   Chat Firebase          -->
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-database.js"></script>
+
+
+<script>
+  // Your web app's Firebase configuration
+  let firebaseConfig = {
+    apiKey: "AIzaSyCr8NJ39kbBjwpyrP2CF2dJutZJV7YLxA0",
+    authDomain: "test-8ce30.firebaseapp.com",
+    databaseURL: "https://test-8ce30.firebaseio.com",
+    projectId: "test-8ce30",
+    storageBucket: "test-8ce30.appspot.com",
+    messagingSenderId: "90944581488",
+    appId: "1:90944581488:web:b2333a4c6608efbcc269b5",
+    measurementId: "G-DVPWG9ER12"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+
+  const database = firebase.database();
+
+  let chat = "";
+  let chatlog = 0; 
+  $("#send").on("click", function(event) {
+
+    
+    // prevent form from trying to submit/refresh the page
+    event.preventDefault();
+    
+    let chat = $("#chatbox").val().trim()
+    // Capture User Inputs and store them into variables
+    console.log(chat)
+    let chatp = $("<p>");
+
+      chatp.attr("id", "item-" + chatlog);
+      chatp.text(chat);
+   
+      // $('#chatArea').append(chatp);
+    // Console log each of the user inputs to confirm we are receiving them
+    
+    
+      chatlog ++;
+    // Output all of the new information into the relevant HTML sections
+   
+
+    database.ref().push({
+   chat
+
+  });
+      
+
+  });
+
+  
+
+  database.ref().on("child_added", function(snapshot) {
+
+// Print the initial data to the console.
+console.log(snapshot.val());
+
+// Log the value of the various properties
+console.log(snapshot.val().chat);
+
+
+// Change the HTML
+// $('#chatArea').text(snapshot.val().chat);
+
+let newRow = $('<p>')
+
+  let chat = $('<p>').text(snapshot.val().chat)
+  
+
+  $("#chatArea").append(chat)
+
+// If any errors are experienced, log them to console.
+}, function(errorObject) {
+console.log("The read failed: " + errorObject.code);
+});
 
 
 
+</script>
 
 </body>
 </html>
