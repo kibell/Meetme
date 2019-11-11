@@ -9,7 +9,13 @@ function initMap() {
     
     let directionsService = new google.maps.DirectionsService;
     let geocoder = new google.maps.Geocoder();
-    
+    //define start and end addresses globally
+    let start = document.getElementById('start').value;
+    let end = document.getElementById('end').value;
+    let startLat;
+    let startLng;
+    let endLat;
+    let endLng;
     
  
     let map = new google.maps.Map(document.getElementById('map'), {
@@ -53,11 +59,13 @@ function initMap() {
 
 $( document).ready(function(){
 document.getElementById('findLocation').addEventListener('click', function(){
+  let start = document.getElementById('start').value;
+    let end = document.getElementById('end').value;
 console.log("hey");
-geocodeAddress(geocoder, map);
-function geocodeAddress(geocoder, resultsMap) {
+geocodeAddress(start, geocoder, map);
+function geocodeAddress( address, geocoder, resultsMap) {
     // let address = document.getElementById('inputTest').value;
-    let address = "Sydney, NSW";
+    //let address = "Sydney, NSW";
     console.log(address);
     geocoder.geocode({'address': address}, function(results, status) {
         console.log(results);
@@ -84,11 +92,35 @@ function geocodeAddress(geocoder, resultsMap) {
 document.getElementById('get-directions').addEventListener('click', function(){
   
   calculateAndDisplayRoute(directionsService, directionsRenderer);
+  calculateAndDisplayMidpoint();
 
 });
 
 
 });
+
+function calculateAndDisplayMidpoint(){
+  console.log("calculating midpoint");
+
+  
+}
+
+function getAddressLat(address, geocoder){
+  geocoder.geocode({'address': address}, function(results, status) {
+    console.log(results);
+          if (status === 'OK') {
+            console.log(results[0].geometry.location.lat());
+            console.log(results[0].geometry.location.lng());
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+
+
+}
+function getAddressLng(){
+
+}
 }
  
 
