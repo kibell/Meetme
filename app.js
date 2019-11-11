@@ -1,35 +1,41 @@
-console.log ("im working")
+console.log("im working")
 const GeoLocationURL = "https://maps.googleapis.com/maps/api/geocode/json?address=77064&key=AIzaSyCM2ChWHyTWpo5OJQFdiI-4tLDFUugVc7Q"
 let map;
-
+//define start and end coordinates globally
+let startLat = 0;
+let startLng = 0;
+let endLat = 0;
+let endLng = 0;
+let midLat = 0; 
+let midLang = 0;
 
 
 function initMap() {
-    let directionsRenderer = new google.maps.DirectionsRenderer;
-    
-    let directionsService = new google.maps.DirectionsService;
-    let geocoder = new google.maps.Geocoder();
-    //define start and end addresses globally
-    let start = document.getElementById('start').value;
-    let end = document.getElementById('end').value;
-    let startLat;
-    let startLng;
-    let endLat;
-    let endLng;
-    
- 
-    let map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 7,
-      center: {lat: 41.85, lng: -87.65}
-    });
-    directionsRenderer.setMap(map);
-    directionsRenderer.setPanel(document.getElementById('right-panel'));
-    
-    let control = document.getElementById('floating-panel');
-    control.style.display = 'block';
-    map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
-    
-    /* let onChangeHandler = function() {
+  let directionsRenderer = new google.maps.DirectionsRenderer;
+
+  let directionsService = new google.maps.DirectionsService;
+  let geocoder = new google.maps.Geocoder();
+
+  let start = document.getElementById('start').value;
+  let end = document.getElementById('end').value;
+
+
+
+  let map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 7,
+    center: {
+      lat: 41.85,
+      lng: -87.65
+    }
+  });
+  directionsRenderer.setMap(map);
+  directionsRenderer.setPanel(document.getElementById('right-panel'));
+
+  let control = document.getElementById('floating-panel');
+  control.style.display = 'block';
+  map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
+
+  /* let onChangeHandler = function() {
       calculateAndDisplayRoute(directionsService, directionsRenderer);
       
     };
@@ -39,12 +45,12 @@ function initMap() {
   function calculateAndDisplayRoute(directionsService, directionsRenderer) {
     let start = document.getElementById('start').value;
     let end = document.getElementById('end').value;
-    
+
     directionsService.route({
       origin: start,
       destination: end,
       travelMode: 'DRIVING'
-    }, function(response, status) {
+    }, function (response, status) {
       if (status === 'OK') {
         directionsRenderer.setDirections(response);
         console.log(response)
@@ -57,76 +63,100 @@ function initMap() {
 
 
 
-$( document).ready(function(){
-document.getElementById('findLocation').addEventListener('click', function(){
-  let start = document.getElementById('start').value;
-    let end = document.getElementById('end').value;
-console.log("hey");
-geocodeAddress(start, geocoder, map);
-function geocodeAddress( address, geocoder, resultsMap) {
-    // let address = document.getElementById('inputTest').value;
-    //let address = "Sydney, NSW";
-    console.log(address);
-    geocoder.geocode({'address': address}, function(results, status) {
-        console.log(results);
-              if (status === 'OK') {
-                console.log(results[0].geometry.location.lat());
-                console.log(results[0].geometry.location.lng());
-                let marker = new google.maps.Marker({
-                  map: resultsMap,
-                  position: results[0].geometry.location
-                });
-              } else {
-                alert('Geocode was not successful for the following reason: ' + status);
-              }
-            });
-          
+  $(document).ready(function () {
+    
+    document.getElementById('findLocation').addEventListener('click', function () {
+    });
 
+    //add a function that gets triggered on click of "Go" button, to get directions between start and end 
+    document.getElementById('get-directions').addEventListener('click', function () {
 
+      calculateAndDisplayRoute(directionsService, directionsRenderer);
+      geocodeAddress(geocoder, map);
 
-}
+      function geocodeAddress(geocoder, resultsMap) {
+       // let address = document.getElementById('inputTest').value;
+       let start = document.getElementById('start').value;
+       let end = document.getElementById('end').value;
+       console.log("Start in function" + start);
+        geocoder.geocode({
+          'address': start
+        }, function (results, status){
+            if(status === 'OK'){
+              startLat = results[0].geometry.location.lat();
+              startLng = results[0].geometry.location.lng();
+              console.log("lat " + startLat + "Long: "+ startLng); 
+            }else{
+              alert('Geocode was not successful for the following reason: ' + status);
+            }
+        }
+        );
 
-});
-
-//add a function that gets triggered on click of "Go" button, to get directions between start and end 
-document.getElementById('get-directions').addEventListener('click', function(){
-  
-  calculateAndDisplayRoute(directionsService, directionsRenderer);
-  calculateAndDisplayMidpoint();
-
-});
-
-
-});
-
-function calculateAndDisplayMidpoint(){
-  console.log("calculating midpoint");
-
-  
-}
-
-function getAddressLat(address, geocoder){
-  geocoder.geocode({'address': address}, function(results, status) {
-    console.log(results);
+        let address = "2630 Quincannon Lane, Houston, TX 77043";
+        console.log(address);
+        geocoder.geocode({
+          'address': address
+        }, function (results, status) {
+          console.log(results);
           if (status === 'OK') {
             console.log(results[0].geometry.location.lat());
             console.log(results[0].geometry.location.lng());
+            let marker = new google.maps.Marker({
+              map: resultsMap,
+              position: results[0].geometry.location
+            });
           } else {
             alert('Geocode was not successful for the following reason: ' + status);
           }
         });
 
 
-}
-function getAddressLng(){
 
+
+      }
+
+    });
+
+
+  });
+
+  function calculateAndDisplayMidpoint() {
+    //let start = document.getElementById('start').value;
+    //let end = document.getElementById('end').value;
+    console.log("calculating midpoint");
+    console.log("Start address: " + start);
+    startLat = getAddressLat(start, geocoder);
+    console.log("Start Lat" + startLat);
+
+
+  }
+
+  function getAddressLat(address, geocoder) {
+    geocoder.geocode({
+      'address': address
+    }, function (results, status) {
+      console.log(results);
+      if (status === 'OK') {
+        return results[0].geometry.location.lat();
+
+      } else {
+        return 0;
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+
+
+  }
+
+  function getAddressLng() {
+
+  }
 }
-}
- 
+
 
 // chat function //
 
- 
+
 
 // Create a variable to reference the database
 
