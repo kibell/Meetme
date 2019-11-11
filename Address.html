@@ -27,8 +27,10 @@
           </li>
           
           <li class="nav-item">
-      
+            <button id = "btnLogOut"> Log Out </button>
           </li>
+
+
         </ul>
         
           
@@ -162,6 +164,7 @@ async defer></script>
      https://firebase.google.com/docs/web/setup#available-libraries -->
 <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-analytics.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-auth.js"></script>
 
 
 <script>
@@ -181,7 +184,7 @@ async defer></script>
   firebase.analytics();
 
   const database = firebase.database();
-  const message = firebase.messaging();
+  
 
   let chat = "";
   let chatlog = 0; 
@@ -241,7 +244,17 @@ let newRow = $('<p>')
 console.log("The read failed: " + errorObject.code);
 });
 
-
+$("#btnLogOut").on('click', e=>{
+  firebase.auth().signOut();
+  console.log('logged out')
+})
+firebase.auth().onAuthStateChanged(user=>{ 
+  if(user){
+    
+  } else{
+    window.location = 'index.html'
+  }
+})
 
 </script>
 
