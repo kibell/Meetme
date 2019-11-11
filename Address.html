@@ -27,8 +27,10 @@
           </li>
           
           <li class="nav-item">
-      
+            <button id = "btnLogOut"> Log Out </button>
           </li>
+
+
         </ul>
         
           
@@ -44,8 +46,8 @@
       <h1 class="display-4 col-md-4 "><img src="assest/images/logo.png"></h1>
       <div>
       <div class="form-group col-md-8">
-            <label for="exampleFormControlTextarea1">Messaage</label>
-            <div  id="chatArea" rows="7" style="width: 550px; Background : aliceblue; "> 
+            <label for="exampleFormControlTextarea1">Messaage Center</label>
+            <div  id="chatArea" rows="7" style="width: 550px;  Background : aliceblue; "> 
               
             </div>
           </div>
@@ -162,6 +164,7 @@ async defer></script>
      https://firebase.google.com/docs/web/setup#available-libraries -->
 <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-analytics.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-auth.js"></script>
 
 
 <script>
@@ -181,11 +184,12 @@ async defer></script>
   firebase.analytics();
 
   const database = firebase.database();
+  
 
   let chat = "";
   let chatlog = 0; 
   $("#send").on("click", function(event) {
-
+    
     
     // prevent form from trying to submit/refresh the page
     event.preventDefault();
@@ -205,16 +209,16 @@ async defer></script>
       chatlog ++;
     // Output all of the new information into the relevant HTML sections
    
-
     database.ref().push({
    chat
 
   });
-      
+ 
 
   });
 
   
+  $('#chatbox').text("");
 
   database.ref().on("child_added", function(snapshot) {
 
@@ -240,7 +244,17 @@ let newRow = $('<p>')
 console.log("The read failed: " + errorObject.code);
 });
 
-
+$("#btnLogOut").on('click', e=>{
+  firebase.auth().signOut();
+  console.log('logged out')
+})
+firebase.auth().onAuthStateChanged(user=>{ 
+  if(user){
+    
+  } else{
+    window.location = 'index.html'
+  }
+})
 
 </script>
 
