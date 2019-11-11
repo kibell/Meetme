@@ -7,7 +7,8 @@ let startLng = 0;
 let endLat = 0;
 let endLng = 0;
 let midLat = 0; 
-let midLang = 0;
+let midLng = 0;
+let input = 0;
 
 
 function initMap() {
@@ -15,7 +16,7 @@ function initMap() {
 
   let directionsService = new google.maps.DirectionsService;
   let geocoder = new google.maps.Geocoder();
-
+  let infowindow = new google.maps.InfoWindow;
   let start = document.getElementById('start').value;
   let end = document.getElementById('end').value;
 
@@ -78,12 +79,15 @@ function initMap() {
        // let address = document.getElementById('inputTest').value;
        let start = document.getElementById('start').value;
        let end = document.getElementById('end').value;
+
+       //get lat long for start address 
        console.log("Start in function" + start);
         geocoder.geocode({
           'address': start
         }, function (results, status){
             if(status === 'OK'){
               startLat = results[0].geometry.location.lat();
+              midLat += startLat;
               startLng = results[0].geometry.location.lng();
               console.log("lat " + startLat + "Long: "+ startLng); 
             }else{
@@ -92,10 +96,102 @@ function initMap() {
         }
         );
 
-        let address = "2630 Quincannon Lane, Houston, TX 77043";
-        console.log(address);
+        //get lat long for end address
+        console.log("End in function" + end);
         geocoder.geocode({
-          'address': address
+          'address': end
+        }, function (results, status){
+            if(status === 'OK'){
+              endLat = results[0].geometry.location.lat();
+              midLat += endLat;
+              endLng = results[0].geometry.location.lng();
+              console.log("lat " + endLat + "Long: "+ endLng); 
+            }else{
+              alert('Geocode was not successful for the following reason: ' + status);
+            }
+        }
+        );
+
+        //get lat long for mid point address
+        
+
+        /*
+ * Find midpoint between two coordinates points
+ * Source : http://www.movable-type.co.uk/scripts/latlong.html
+ */
+
+//-- Define radius function
+if (typeof (Number.prototype.toRad) === "undefined") {
+  Number.prototype.toRad = function () {
+      return this * Math.PI / 180;
+  }
+}
+
+//-- Define degrees function
+if (typeof (Number.prototype.toDeg) === "undefined") {
+  Number.prototype.toDeg = function () {
+      return this * (180 / Math.PI);
+  }
+}
+
+//-- Define middle point function
+function middlePoint(lat1, lng1, lat2, lng2) {
+
+  //-- Longitude difference
+  let dLng = (lng2 - lng1).toRad();
+
+  //-- Convert to radians
+  lat1 = lat1.toRad();
+  lat2 = lat2.toRad();
+  lng1 = lng1.toRad();
+
+  let bX = Math.cos(lat2) * Math.cos(dLng);
+  let bY = Math.cos(lat2) * Math.sin(dLng);
+  let lat3 = Math.atan2(Math.sin(lat1) + Math.sin(lat2), Math.sqrt((Math.cos(lat1) + bX) * (Math.cos(lat1) + bX) + bY * bY));
+  let lng3 = lng1 + Math.atan2(bY, Math.cos(lat1) + bX);
+
+  //-- Return result
+  return [lng3.toDeg(), lat3.toDeg()];
+}
+
+//-- Example
+let midPoint = middlePoint(29.9161683, -95.5302337, 29.8760239, -95.52498630000002);
+midLng  = midPoint[0];
+midLat = midPoint[1];
+console.log("midLat: "+ midLat);
+console.log("midLng: " + midLng);
+input = midLat + ","+midLng;
+//console.log(middlePoint(48.2320728, 4.1482735, 48.2320524, 4.1480716));
+        /* midLat = (startLat + startLng)/2;
+        midLng = (startLng + endLng)/2;
+        console.log("midLat: "+ midLat);
+        console.log("midLng: " + midLng);
+        
+        console.log("Input: "+ input); */
+
+        //add code to reverse geocode and pin address for midpoint lat long 
+        let latlngStr = input.split(',', 2);
+        let latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
+        geocoder.geocode({'location': latlng}, function(results, status) {
+          if (status === 'OK') {
+            if (results[0]) {
+              map.setZoom(11);
+              let marker = new google.maps.Marker({
+                position: latlng,
+                map: map
+              });
+              infowindow.setContent(results[0].formatted_address);
+              infowindow.open(map, marker);
+            } else {
+              window.alert('No results found');
+            }
+          } else {
+            window.alert('Geocoder failed due to: ' + status);
+          }
+        });
+        
+       /*  geocoder.geocode({
+          'location': latlng
         }, function (results, status) {
           console.log(results);
           if (status === 'OK') {
@@ -108,11 +204,34 @@ function initMap() {
           } else {
             alert('Geocode was not successful for the following reason: ' + status);
           }
+        }); */
+
+
+
+
+      }
+
+      function geocodeLatLng(midLat, midLng, geocoder, map, infowindow) {
+        let input = midLat + ',' + midLng;
+        let latlngStr = input.split(',', 2);
+        let latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
+        geocoder.geocode({'location': latlng}, function(results, status) {
+          if (status === 'OK') {
+            if (results[0]) {
+              map.setZoom(11);
+              let marker = new google.maps.Marker({
+                position: latlng,
+                map: map
+              });
+              infowindow.setContent(results[0].formatted_address);
+              infowindow.open(map, marker);
+            } else {
+              window.alert('No results found');
+            }
+          } else {
+            window.alert('Geocoder failed due to: ' + status);
+          }
         });
-
-
-
-
       }
 
     });
@@ -158,7 +277,7 @@ function initMap() {
 
 
 
-// Create a variable to reference the database
+// Create a letiable to reference the database
 
 
 
