@@ -1,4 +1,4 @@
-console.log ("im working")
+
 const GeoLocationURL = "https://maps.googleapis.com/maps/api/geocode/json?address=77064&key=AIzaSyCM2ChWHyTWpo5OJQFdiI-4tLDFUugVc7Q"
 let map;
 
@@ -92,11 +92,43 @@ document.getElementById('get-directions').addEventListener('click', function(){
 }
  
 
-// chat function //
+// sign in auth ------------ //
+
+
+
+
+$("#btnLogOut").on('click', e=>{
+  firebase.auth().signOut();
+  console.log('logged out')
+})
+firebase.auth().onAuthStateChanged(user=>{ 
+  
+  if(user){
+    
+  } else{
+    window.location = 'index.html'
+  }
+})
 
  
+firebase.auth().onAuthStateChanged(user=>{ 
+  if(user){
+    console.log(user.displayName)
+  } else{
+    console.log("boo")
+  }
+})
 
-// Create a variable to reference the database
+
+
+
+
+
+
+// Chat-------------------------
+
+
+
 
 
 

@@ -26,10 +26,13 @@ opacity: .9;
 .sign{
 
     color: white;   
-    font-family: 'ZCOOL XiaoWei', serif;
+    font-family: 'Jomolhari', serif;
     text-align: center;
     margin-top: 50px;
     font-weight: bolder;
+    border-style: solid;
+    background:linear-gradient(to right,blue, black ) ;
+
 }
 
 .text-muted{
