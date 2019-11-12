@@ -50,25 +50,29 @@
 
     <div class="row">
       <div class="col-md-6 signIn">
-<h1 class="sign" >Sign In</h1>
-<p class="sign" style="font-size: 25px;">Sign in using your login information and start connecting with your friends </p>
+<h1 class="sign" >Register</h1>
+<p class="sign" style="font-size: 25px;">Sign up by filling in your user info then click "Let's Meet!" </p>
 </div> 
+
     <form class="col-md-6" style="background: aliceblue;margin-bottom: 100px; border-style:solid; border-width: 10px; border-color: blue;">
       <div class="form-group " style="margin-top: 35px; ;  ">
         <label for="exampleInputEmail1">Email address</label>
         <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email">
         <small id="emailHelp" class="form-text text-muted" >We'll never share your email with anyone else.</small>
       </div>
+      <div class="form-group " style="margin-top: 35px; ;  ">
+        <label for="exampleInputEmail1">Display Name</label>
+        <input type="email" class="form-control" id="inputName" aria-describedby="emailHelp" placeholder="Enter name you want people to see">
+        
+      </div>
       <div class="form-group">
         <label for="exampleInputPassword1">Password</label>
         <input type="password" class="form-control" id="inputPassword" placeholder="Password">
       </div>
-      <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Remember Me</label>
-      </div><button  class="btn btn-primary signIn " style="margin-bottom: 25px;"><a href="#" style="color: papayawhip;"> Login </a> </button>
-      <button  class="btn btn-primary regis" style="margin-bottom: 25px;"><a href="#" style="color: papayawhip;"> Sign Up </a> </button>
       
+     
+      <button  class="btn btn-primary signUp" style="margin-bottom: 25px; text-align: center;"><a href="#" style="color: papayawhip;"> Let's Meet! </a> </button>
+      <button  class="btn btn-secondary cancel" style="margin-bottom: 25px; text-align: center;"><a href="index.html" style="color: papayawhip;"> Cancel </a> </button>
     </form>
    
   </div>
@@ -114,12 +118,22 @@
   const auth = firebase.auth();
  
   
-$('.regis').on('click', e=>{
+$('.signUp').on('click', e=>{
   event.preventDefault();
-  window.location ="signup.html"
+  const email = document.getElementById("inputEmail").value;
+  const pass =  document.getElementById("inputPassword").value;
+  const display = document.getElementById("inputName").value;
+  console.log(email)
+  
+  firebase.auth().createUserWithEmailAndPassword(email, pass).catch(function(error) {
+   console.log(error.message);
+   
+ $(".text-muted").text(error);
+ 
+  
+  });
   
 })
-
 $(".signIn").on('click', e=>{
   event.preventDefault();
   const email = document.getElementById("inputEmail").value;

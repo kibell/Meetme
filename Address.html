@@ -182,10 +182,8 @@ async defer></script>
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
-
   const database = firebase.database();
   
-
   let chat = "";
   let chatlog = 0; 
   $("#send").on("click", function(event) {
@@ -198,7 +196,6 @@ async defer></script>
     // Capture User Inputs and store them into variables
     console.log(chat)
     let chatp = $("<p>");
-
       chatp.attr("id", "item-" + chatlog);
       chatp.text(chat);
    
@@ -211,39 +208,26 @@ async defer></script>
    
     database.ref().push({
    chat
-
   });
  
-
   });
-
   
   $('#chatbox').text("");
-
   database.ref().on("child_added", function(snapshot) {
-
 // Print the initial data to the console.
 console.log(snapshot.val());
-
 // Log the value of the various properties
 console.log(snapshot.val().chat);
-
-
 // Change the HTML
 // $('#chatArea').text(snapshot.val().chat);
-
 let newRow = $('<p>')
-
   let chat = $('<p>').text(snapshot.val().chat)
   
-
   $("#chatArea").append(chat)
-
 // If any errors are experienced, log them to console.
 }, function(errorObject) {
 console.log("The read failed: " + errorObject.code);
 });
-
 $("#btnLogOut").on('click', e=>{
   firebase.auth().signOut();
   console.log('logged out')
@@ -255,7 +239,6 @@ firebase.auth().onAuthStateChanged(user=>{
     window.location = 'index.html'
   }
 })
-
 </script>
 
 </body>
