@@ -155,7 +155,7 @@ function middlePoint(lat1, lng1, lat2, lng2) {
 }
 
 //-- Example
-let midPoint = middlePoint(29.9161683, -95.5302337, 29.8760239, -95.52498630000002);
+let midPoint = middlePoint(startLat, startLng, endLat, endLng);
 midLng  = midPoint[0];
 midLat = midPoint[1];
 console.log("midLat: "+ midLat);
