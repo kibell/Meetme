@@ -123,7 +123,17 @@ $('.signUp').on('click', e=>{
   const email = document.getElementById("inputEmail").value;
   const pass =  document.getElementById("inputPassword").value;
   const display = document.getElementById("inputName").value;
+ 
   console.log(email)
+
+  firebase.auth().createUserWithEmailAndPassword(email, pass)
+.then(function(result) {
+  return result.user.updateProfile({
+    displayName: document.getElementById("inputName").value
+  })
+}).catch(function(error) {
+  console.log(error);
+});
   
   firebase.auth().createUserWithEmailAndPassword(email, pass).catch(function(error) {
    console.log(error.message);
@@ -134,6 +144,12 @@ $('.signUp').on('click', e=>{
   });
   
 })
+
+
+
+
+
+
 $(".signIn").on('click', e=>{
   event.preventDefault();
   const email = document.getElementById("inputEmail").value;

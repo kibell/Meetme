@@ -97,27 +97,7 @@ document.getElementById('get-directions').addEventListener('click', function(){
 
 
 
-$("#btnLogOut").on('click', e=>{
-  firebase.auth().signOut();
-  console.log('logged out')
-})
-firebase.auth().onAuthStateChanged(user=>{ 
-  
-  if(user){
-    
-  } else{
-    window.location = 'index.html'
-  }
-})
 
- 
-firebase.auth().onAuthStateChanged(user=>{ 
-  if(user){
-    console.log(user.displayName)
-  } else{
-    console.log("boo")
-  }
-})
 
 
 
