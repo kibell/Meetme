@@ -9,7 +9,7 @@ let endLng = 0;
 let midLat = 0; 
 let midLng = 0;
 let input = 0;
-
+let distance;
 
 function initMap() {
   let directionsRenderer = new google.maps.DirectionsRenderer;
@@ -143,9 +143,10 @@ function middlePoint(lat1, lng1, lat2, lng2) {
 let midPoint = middlePoint(startLat, startLng, endLat, endLng);
 midLng  = midPoint[0];
 midLat = midPoint[1];
+
 mystartLatLng = new google.maps.LatLng({lat: startLat, lng: startLng});
 myendLatLng = new google.maps.LatLng({lat: endLat, lng: endLng});
-let distance = google.maps.geometry.spherical.computeDistanceBetween(mystartLatLng, myendLatLng) * .2;
+ distance = google.maps.geometry.spherical.computeDistanceBetween(mystartLatLng, myendLatLng) * .2;
 console.log("distance" + distance);
 console.log("midLat: "+ midLat);
 console.log("midLng: " + midLng);
@@ -187,6 +188,7 @@ input = midLat + ","+midLng;
       }
 
       function geocodeLatLng(midLat, midLng, geocoder, map, infowindow) {
+
         let input = midLat + ',' + midLng;
         let latlngStr = input.split(',', 2);
         let latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
@@ -210,24 +212,41 @@ input = midLat + ","+midLng;
       }
 
       //get restaurants from places api
+      console.log("request Midpoint  " + midLat + midLng)
+ let center = new google.maps.LatLng(midLat, midLng);     
  let category = $("#category").val();
  console.log(category);
  var request = {
-  query: 'Norris Conference Centers',
-  fields: ['name', 'geometry'],
+  location: center,
+  radius: 16099,
+  types:['cafe']
 };
 var service = new google.maps.places.PlacesService(map);
 
-  service.findPlaceFromQuery(request, function(results, status) {
-    if (status === google.maps.places.PlacesServiceStatus.OK) {
-      console.log("Places API OK : " + results) ;
-      for (var i = 0; i < results.length; i++) {
-        createMarker(results[i]);
-        
-      }
-      map.setCenter(results[0].geometry.location);
-    }
-  });
+
+service.nearbySearch(request, callback);
+console.log(request)
+// console.log
+
+function callback(results, status) {
+  console.log(results)
+
+  // if (status === google.maps.places.PlacesServiceStatus.OK) 
+  //   console.log("Nearby search : " + results) ;
+  //   // for (var i = 0; i < results.length; i++) {
+  //   //   createMarker(results[i]);
+      
+  
+
+  
+}
+
+
+  // service.findPlaceFromQuery(request, function(results, status) {
+    
+  //     map.setCenter(results[0].geometry.location);
+  //   }
+  // });
 
   function createMarker(place) {
     var marker = new google.maps.Marker({
