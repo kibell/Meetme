@@ -133,7 +133,7 @@ if (typeof (Number.prototype.toDeg) === "undefined") {
       return this * (180 / Math.PI);
   }
 }
-
+//function from stackoverflow to calculate middle point
 //-- Define middle point function
 function middlePoint(lat1, lng1, lat2, lng2) {
 
