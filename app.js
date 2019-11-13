@@ -1,4 +1,4 @@
-console.log("im working")
+
 const GeoLocationURL = "https://maps.googleapis.com/maps/api/geocode/json?address=77064&key=AIzaSyCM2ChWHyTWpo5OJQFdiI-4tLDFUugVc7Q"
 let map;
 //define start and end coordinates globally
@@ -281,11 +281,24 @@ input = midLat + ","+midLng;
 }
 
 
-// chat function //
+// sign in auth ------------ //
 
 
 
-// Create a letiable to reference the database
+
+
+
+
+
+
+
+
+
+// Chat-------------------------
+
+
+
+
 
 
 

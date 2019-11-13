@@ -27,8 +27,10 @@
           </li>
           
           <li class="nav-item">
-      
+            <button id = "btnLogOut"> Log Out </button>
           </li>
+
+
         </ul>
         
           
@@ -39,22 +41,13 @@
   <div class="jumbotron jumbotron-fluid">
     
     <div class="container">
-        
-      <div class="row">
-      <h1 class="display-4 col-md-4 "><img src="assest/images/logo.png"></h1>
-      <div>
-      <div class="form-group col-md-8">
-            <label for="exampleFormControlTextarea1">Messaage</label>
-            <div  id="chatArea" rows="7" style="width: 550px; Background : aliceblue; "> 
-              
-            </div>
-          </div>
-      <div class="input-group ">
-            <input type="text" class="form-control" placeholder="Say Hey!"  id="chatbox" aria-label="Recipient's username" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-              <button class="btn btn-secondary" type="button" id="send" >Send Messaage</button>
-            </div>
-          </div>
+       
+      <div class="col-md-12">
+      <h1 class="display-4"></h1>
+        <img src="assest/images/logo.png" >
+      </div>
+      
+          
     </div>
   </div>
   </div>
@@ -65,10 +58,27 @@
 
    
   
-  <div class="container" style=" height:400px ;">
+  <div class="container" >
+      <div class="form-group col-md-12" style="background:linear-gradient(to right,skyblue, black)">
+          <h3 id="message" style="text-align: center;  ; color: papayawhip ;">Message Center</h3>
+          <div  id="chatArea" rows="7"  style=" Background : aliceblue;" >
+            
+          </div>
+        
+      <div class="input-group ">
+          <input type="text" class="form-control" placeholder="Say Hey!"  id="chatbox" aria-label="Recipient's username" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-secondary" type="button" id="send"  style="margin-bottom: 25px;">Send Messaage</button>
+          </div>
+        </div>
+      </div>
 
-    <div class="row">
-      <div class="col-md-6 signIn">
+
+
+
+
+    <div class="row" style=" height:400px" >
+      <div class="col-md-6 ">
             <style>
                     /* Always set the map height explicitly to define the size of the div
                      * element that contains the map. */
@@ -83,14 +93,17 @@
                     }
                   </style>
                 </head>
-                <body>
+               
+
                     <div id="map"> </div>
-                
+                </div>
                   
                   
-</div> 
-    <form class="col-md-6" style="background: aliceblue;margin-bottom: 100px; border-style:solid; border-width: 10px; border-color: blue;">
-        <div id="floating-panel">
+
+
+    <div class="col-md-6" style="background: aliceblue;margin-bottom: 100px; border-style:solid; border-width: 10px; border-color: blue;">
+       
+      <div id="floating-panel" style="margin-top: 55px; " >
             <strong>Start:</strong>
             <input type="text" id="start">
             <!-- <select id="start">
@@ -139,14 +152,13 @@
       
           <button type="button" class="btn btn-primary" id = "findLocation">Find Location</button>
 
-    </form>
+        </div>
   </div>
+</div>
+
+</div> 
 
 
-
-
-
-  </div>
 
 
 
@@ -170,6 +182,7 @@ async defer></script>
      https://firebase.google.com/docs/web/setup#available-libraries -->
 <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-analytics.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-auth.js"></script>
 
 
 <script>
@@ -187,13 +200,24 @@ async defer></script>
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
-
   const database = firebase.database();
-
+  
+  
+$("#btnLogOut").on('click', e=>{
+  firebase.auth().signOut();
+  console.log('logged out')
+})
+firebase.auth().onAuthStateChanged(user=>{ 
+  if(user){
+    console.log(user.displayName)
+  } else{
+    window.location = 'index.html'
+  }
+})
   let chat = "";
   let chatlog = 0; 
   $("#send").on("click", function(event) {
-
+    
     
     // prevent form from trying to submit/refresh the page
     event.preventDefault();
@@ -202,7 +226,6 @@ async defer></script>
     // Capture User Inputs and store them into variables
     console.log(chat)
     let chatp = $("<p>");
-
       chatp.attr("id", "item-" + chatlog);
       chatp.text(chat);
    
@@ -213,36 +236,24 @@ async defer></script>
       chatlog ++;
     // Output all of the new information into the relevant HTML sections
    
-
     database.ref().push({
    chat
-
   });
-      
-
+ 
   });
-
   
-
+  $('#chatbox').text("");
   database.ref().on("child_added", function(snapshot) {
-
 // Print the initial data to the console.
 console.log(snapshot.val());
-
 // Log the value of the various properties
 console.log(snapshot.val().chat);
-
-
 // Change the HTML
 // $('#chatArea').text(snapshot.val().chat);
-
 let newRow = $('<p>')
-
   let chat = $('<p>').text(snapshot.val().chat)
   
-
   $("#chatArea").append(chat)
-
 // If any errors are experienced, log them to console.
 }, function(errorObject) {
 console.log("The read failed: " + errorObject.code);
