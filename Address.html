@@ -41,22 +41,13 @@
   <div class="jumbotron jumbotron-fluid">
     
     <div class="container">
-        
-      <div class="row">
-      <h1 class="display-4 col-md-4 "><img src="assest/images/logo.png"></h1>
-      <div>
-      <div class="form-group col-md-8">
-            <label for="exampleFormControlTextarea1">Messaage Center</label>
-            <div  id="chatArea" rows="7" style="width: 550px;  Background : aliceblue; "> 
-              
-            </div>
-          </div>
-      <div class="input-group ">
-            <input type="text" class="form-control" placeholder="Say Hey!"  id="chatbox" aria-label="Recipient's username" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-              <button class="btn btn-secondary" type="button" id="send" >Send Messaage</button>
-            </div>
-          </div>
+       
+      <div class="col-md-12">
+      <h1 class="display-4"></h1>
+        <img src="assest/images/logo.png" >
+      </div>
+      
+          
     </div>
   </div>
   </div>
@@ -67,10 +58,27 @@
 
    
   
-  <div class="container" style=" height:400px ;">
+  <div class="container" >
+      <div class="form-group col-md-12" style="background:linear-gradient(to right,skyblue, black)">
+          <h3 id="message" style="text-align: center;  ; color: papayawhip ;">Message Center</h3>
+          <div  id="chatArea" rows="7"  style=" Background : aliceblue;" >
+            
+          </div>
+        
+      <div class="input-group ">
+          <input type="text" class="form-control" placeholder="Say Hey!"  id="chatbox" aria-label="Recipient's username" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-secondary" type="button" id="send"  style="margin-bottom: 25px;">Send Messaage</button>
+          </div>
+        </div>
+      </div>
 
-    <div class="row">
-      <div class="col-md-6 signIn">
+
+
+
+
+    <div class="row" style=" height:400px" >
+      <div class="col-md-6 ">
             <style>
                     /* Always set the map height explicitly to define the size of the div
                      * element that contains the map. */
@@ -85,14 +93,17 @@
                     }
                   </style>
                 </head>
-                <body>
+               
+
                     <div id="map"> </div>
-                
+                </div>
                   
                   
-</div> 
-    <form class="col-md-6" style="background: aliceblue;margin-bottom: 100px; border-style:solid; border-width: 10px; border-color: blue;">
-        <div id="floating-panel">
+
+
+    <div class="col-md-6" style="background: aliceblue;margin-bottom: 100px; border-style:solid; border-width: 10px; border-color: blue;">
+       
+      <div id="floating-panel" style="margin-top: 55px; " >
             <strong>Start:</strong>
             <input type="text" id="start">
             <!-- <select id="start">
@@ -133,14 +144,13 @@
       
           <button type="button" class="btn btn-primary" id = "findLocation">Find Location</button>
 
-    </form>
+        </div>
   </div>
+</div>
+
+</div> 
 
 
-
-
-
-  </div>
 
 
 
@@ -184,6 +194,18 @@ async defer></script>
   firebase.analytics();
   const database = firebase.database();
   
+  
+$("#btnLogOut").on('click', e=>{
+  firebase.auth().signOut();
+  console.log('logged out')
+})
+firebase.auth().onAuthStateChanged(user=>{ 
+  if(user){
+    console.log(user.displayName)
+  } else{
+    window.location = 'index.html'
+  }
+})
   let chat = "";
   let chatlog = 0; 
   $("#send").on("click", function(event) {
@@ -228,17 +250,9 @@ let newRow = $('<p>')
 }, function(errorObject) {
 console.log("The read failed: " + errorObject.code);
 });
-$("#btnLogOut").on('click', e=>{
-  firebase.auth().signOut();
-  console.log('logged out')
-})
-firebase.auth().onAuthStateChanged(user=>{ 
-  if(user){
-    
-  } else{
-    window.location = 'index.html'
-  }
-})
+
+
+
 </script>
 
 </body>
