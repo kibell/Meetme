@@ -29,7 +29,7 @@ function initMap() {
     }
   });
   directionsRenderer.setMap(map);
-  directionsRenderer.setPanel(document.getElementById('right-panel'));
+  // directionsRenderer.setPanel(document.getElementById('right-panel'));
 
   let control = document.getElementById('floating-panel');
   control.style.display = 'block';
@@ -218,8 +218,8 @@ input = midLat + ","+midLng;
  console.log(category);
  var request = {
   location: center,
-  radius: 16099,
-  types:['cafe']
+  radius: 16609,
+  types:category
 };
 var service = new google.maps.places.PlacesService(map);
 
@@ -231,11 +231,21 @@ console.log(request)
 function callback(results, status) {
   console.log(results)
 
-  // if (status === google.maps.places.PlacesServiceStatus.OK) 
-  //   console.log("Nearby search : " + results) ;
-  //   // for (var i = 0; i < results.length; i++) {
-  //   //   createMarker(results[i]);
-      
+  if (status === google.maps.places.PlacesServiceStatus.OK) {
+    console.log("Nearby search : " + results) ;
+    for (var i = 0; i < results.length; i++) {
+      createMarker(results[i]);
+    let newP = $('<p>')
+    newP.text(results[i].name)
+
+    $('#right-panel').append(newP);
+
+    
+    
+    }
+  
+  
+  }
   
 
   
