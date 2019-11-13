@@ -39,6 +39,7 @@ function initMap() {
   function calculateAndDisplayRoute(directionsService, directionsRenderer) {
     let start = document.getElementById('start').value;
     let end = document.getElementById('end').value;
+    
 
     directionsService.route({
       origin: start,
@@ -47,7 +48,7 @@ function initMap() {
     }, function (response, status) {
       if (status === 'OK') {
         directionsRenderer.setDirections(response);
-        console.log(response)
+        console.log("directions response" + response)
       } else {
         window.alert('Directions request failed due to ' + status);
       }
@@ -142,6 +143,10 @@ function middlePoint(lat1, lng1, lat2, lng2) {
 let midPoint = middlePoint(startLat, startLng, endLat, endLng);
 midLng  = midPoint[0];
 midLat = midPoint[1];
+mystartLatLng = new google.maps.LatLng({lat: startLat, lng: startLng});
+myendLatLng = new google.maps.LatLng({lat: endLat, lng: endLng});
+let distance = google.maps.geometry.spherical.computeDistanceBetween(mystartLatLng, myendLatLng) * .2;
+console.log("distance" + distance);
 console.log("midLat: "+ midLat);
 console.log("midLng: " + midLng);
 input = midLat + ","+midLng;
@@ -162,7 +167,7 @@ input = midLat + ","+midLng;
               // Add circle overlay and bind to marker
               var circle = new google.maps.Circle({
                 map: map,
-                radius: 16093,    // 10 miles in metres
+                radius: distance,    // 10 miles in metres
                 fillColor: '#AA0000'
               });
               circle.bindTo('center', marker, 'position');
