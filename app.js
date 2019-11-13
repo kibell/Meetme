@@ -1,7 +1,7 @@
 
 const GeoLocationURL = "https://maps.googleapis.com/maps/api/geocode/json?address=77064&key=AIzaSyCM2ChWHyTWpo5OJQFdiI-4tLDFUugVc7Q"
-let map;
-//define start and end coordinates globally
+let map; 
+let service;
 let startLat = 0;
 let startLng = 0;
 let endLat = 0;
@@ -13,7 +13,6 @@ let input = 0;
 
 function initMap() {
   let directionsRenderer = new google.maps.DirectionsRenderer;
-
   let directionsService = new google.maps.DirectionsService;
   let geocoder = new google.maps.Geocoder();
   let infowindow = new google.maps.InfoWindow;
@@ -21,7 +20,7 @@ function initMap() {
   let end = document.getElementById('end').value;
 
 
-
+//Rendering map on page
   let map = new google.maps.Map(document.getElementById('map'), {
     zoom: 7,
     center: {
@@ -36,13 +35,7 @@ function initMap() {
   control.style.display = 'block';
   map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
 
-  /* let onChangeHandler = function() {
-      calculateAndDisplayRoute(directionsService, directionsRenderer);
-      
-    };
-    document.getElementById('start').addEventListener('change', onChangeHandler);
-    document.getElementById('end').addEventListener('change', onChangeHandler);
-   */
+  
   function calculateAndDisplayRoute(directionsService, directionsRenderer) {
     let start = document.getElementById('start').value;
     let end = document.getElementById('end').value;
@@ -66,8 +59,6 @@ function initMap() {
 
   $(document).ready(function () {
     
-    document.getElementById('findLocation').addEventListener('click', function () {
-    });
 
     //add a function that gets triggered on click of "Go" button, to get directions between start and end 
     document.getElementById('get-directions').addEventListener('click', function () {
@@ -112,14 +103,7 @@ function initMap() {
         }
         );
 
-        //get lat long for mid point address
-        
-
-        /*
- * Find midpoint between two coordinates points
- * Source : http://www.movable-type.co.uk/scripts/latlong.html
- */
-
+//function from stackoverflow to calculate middle point
 //-- Define radius function
 if (typeof (Number.prototype.toRad) === "undefined") {
   Number.prototype.toRad = function () {
@@ -133,7 +117,7 @@ if (typeof (Number.prototype.toDeg) === "undefined") {
       return this * (180 / Math.PI);
   }
 }
-//function from stackoverflow to calculate middle point
+
 //-- Define middle point function
 function middlePoint(lat1, lng1, lat2, lng2) {
 
@@ -161,14 +145,6 @@ midLat = midPoint[1];
 console.log("midLat: "+ midLat);
 console.log("midLng: " + midLng);
 input = midLat + ","+midLng;
-//console.log(middlePoint(48.2320728, 4.1482735, 48.2320524, 4.1480716));
-        /* midLat = (startLat + startLng)/2;
-        midLng = (startLng + endLng)/2;
-        console.log("midLat: "+ midLat);
-        console.log("midLng: " + midLng);
-        
-        console.log("Input: "+ input); */
-
         //add code to reverse geocode and pin address for midpoint lat long 
         let latlngStr = input.split(',', 2);
         let latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
@@ -180,8 +156,8 @@ input = midLat + ","+midLng;
                 position: latlng,
                 map: map
               });
-              infowindow.setContent(results[0].formatted_address);
-              infowindow.open(map, marker);
+             // infowindow.setContent(results[0].formatted_address);
+              //infowindow.open(map, marker);
 
               // Add circle overlay and bind to marker
               var circle = new google.maps.Circle({
@@ -198,21 +174,7 @@ input = midLat + ","+midLng;
           }
         });
         
-       /*  geocoder.geocode({
-          'location': latlng
-        }, function (results, status) {
-          console.log(results);
-          if (status === 'OK') {
-            console.log(results[0].geometry.location.lat());
-            console.log(results[0].geometry.location.lng());
-            let marker = new google.maps.Marker({
-              map: resultsMap,
-              position: results[0].geometry.location
-            });
-          } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-          }
-        }); */
+    
 
 
 
@@ -241,6 +203,38 @@ input = midLat + ","+midLng;
           }
         });
       }
+
+      //get restaurants from places api
+ let category = $("#category").val();
+ console.log(category);
+ var request = {
+  query: 'Norris Conference Centers',
+  fields: ['name', 'geometry'],
+};
+var service = new google.maps.places.PlacesService(map);
+
+  service.findPlaceFromQuery(request, function(results, status) {
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+      console.log("Places API OK : " + results) ;
+      for (var i = 0; i < results.length; i++) {
+        createMarker(results[i]);
+        
+      }
+      map.setCenter(results[0].geometry.location);
+    }
+  });
+
+  function createMarker(place) {
+    var marker = new google.maps.Marker({
+      map: map,
+      position: place.geometry.location
+    });
+
+    google.maps.event.addListener(marker, 'click', function() {
+      infowindow.setContent(place.name);
+      infowindow.open(map, this);
+    });
+  }
 
     });
 
@@ -275,9 +269,7 @@ input = midLat + ","+midLng;
 
   }
 
-  function getAddressLng() {
-
-  }
+ 
 }
 
 
