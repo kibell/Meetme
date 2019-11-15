@@ -11,13 +11,16 @@ let midLng = 0;
 let input = 0;
 let distance;
 
+
+
+
 function initMap() {
   let directionsRenderer = new google.maps.DirectionsRenderer;
   let directionsService = new google.maps.DirectionsService;
   let geocoder = new google.maps.Geocoder();
   let infowindow = new google.maps.InfoWindow;
-  let start = document.getElementById('start').value;
-  let end = document.getElementById('end').value;
+  let start = document.getElementById('start-address').value;
+  let end = document.getElementById('end-address').value;
 
 
 //Rendering map on page
@@ -37,8 +40,8 @@ function initMap() {
 
   
   function calculateAndDisplayRoute(directionsService, directionsRenderer) {
-    let start = document.getElementById('start').value;
-    let end = document.getElementById('end').value;
+    let start = document.getElementById('start-address').value;
+    let end = document.getElementById('end-address').value;
     
 
     directionsService.route({
@@ -61,16 +64,18 @@ function initMap() {
   $(document).ready(function () {
     
 
-    //add a function that gets triggered on click of "Go" button, to get directions between start and end 
-    document.getElementById('get-directions').addEventListener('click', function () {
+    // $("#start-address-modal").modal({"backdrop": "static"});
 
+    //add a function that gets triggered on click of "Go" button, to get directions between start and end 
+    $('.get-directions').on('click', function () {
+      $("#end-address-modal").modal('hide');
       calculateAndDisplayRoute(directionsService, directionsRenderer);
       geocodeAddress(geocoder, map);
 
       function geocodeAddress(geocoder, resultsMap) {
        // let address = document.getElementById('inputTest').value;
-       let start = document.getElementById('start').value;
-       let end = document.getElementById('end').value;
+       let start = document.getElementById('start-address').value;
+       let end = document.getElementById('end-address').value;
 
        //get lat long for start address 
        console.log("Start in function" + start);
@@ -146,7 +151,7 @@ midLat = midPoint[1];
 
 mystartLatLng = new google.maps.LatLng({lat: startLat, lng: startLng});
 myendLatLng = new google.maps.LatLng({lat: endLat, lng: endLng});
- distance = google.maps.geometry.spherical.computeDistanceBetween(mystartLatLng, myendLatLng) * .2;
+distance = google.maps.geometry.spherical.computeDistanceBetween(mystartLatLng, myendLatLng) * .2;
 console.log("distance" + distance);
 console.log("midLat: "+ midLat);
 console.log("midLng: " + midLng);
@@ -176,7 +181,7 @@ input = midLat + ","+midLng;
               window.alert('No results found');
             }
           } else {
-            window.alert('Geocoder failed due to: ' + status);
+            // window.alert('Geocoder failed due to: ' + status);
           }
         });
         
@@ -206,7 +211,7 @@ input = midLat + ","+midLng;
               window.alert('No results found');
             }
           } else {
-            window.alert('Geocoder failed due to: ' + status);
+            // window.alert('Geocoder failed due to: ' + status);
           }
         });
       }
@@ -216,10 +221,11 @@ input = midLat + ","+midLng;
  let center = new google.maps.LatLng(midLat, midLng);     
  let category = $("#category").val();
  console.log(category);
+ console.log("Distance in places API call" + distance);
  var request = {
   location: center,
-  radius: 16609,
-  types:category
+  radius: distance,
+  types:['restaurant', "food"]
 };
 var service = new google.maps.places.PlacesService(map);
 
@@ -305,6 +311,29 @@ function callback(results, status) {
 
  
 }
+
+
+//start address enter click event
+var startAddress = document.getElementById("start-address");
+startAddress.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+   event.preventDefault();
+   console.log($("#start-address").val());
+   
+   $("#start-address-modal").modal('hide');
+   $("#end-address-modal").modal('show');
+  }
+});
+//End address enter click event
+/* var endAddress = document.getElementById("end-address");
+endAddress.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+   event.preventDefault();
+   console.log($("#end-address").val());
+   $("#end-address-modal").modal('hide');
+  
+  }
+}); */
 
 
 // sign in auth ------------ //
