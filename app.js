@@ -146,7 +146,7 @@ midLat = midPoint[1];
 
 mystartLatLng = new google.maps.LatLng({lat: startLat, lng: startLng});
 myendLatLng = new google.maps.LatLng({lat: endLat, lng: endLng});
- distance = google.maps.geometry.spherical.computeDistanceBetween(mystartLatLng, myendLatLng) * .2;
+distance = google.maps.geometry.spherical.computeDistanceBetween(mystartLatLng, myendLatLng) * .2;
 console.log("distance" + distance);
 console.log("midLat: "+ midLat);
 console.log("midLng: " + midLng);
@@ -216,10 +216,11 @@ input = midLat + ","+midLng;
  let center = new google.maps.LatLng(midLat, midLng);     
  let category = $("#category").val();
  console.log(category);
+ console.log("Distance in places API call" + distance);
  var request = {
   location: center,
-  radius: 16609,
-  types:category
+  radius: distance,
+  types:['restaurant', "food"]
 };
 var service = new google.maps.places.PlacesService(map);
 
