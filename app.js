@@ -67,8 +67,8 @@ function initMap() {
     // $("#start-address-modal").modal({"backdrop": "static"});
 
     //add a function that gets triggered on click of "Go" button, to get directions between start and end 
-    document.getElementById('get-directions').addEventListener('click', function () {
-
+    $('.get-directions').on('click', function () {
+      $("#end-address-modal").modal('hide');
       calculateAndDisplayRoute(directionsService, directionsRenderer);
       geocodeAddress(geocoder, map);
 
@@ -181,7 +181,7 @@ input = midLat + ","+midLng;
               window.alert('No results found');
             }
           } else {
-            window.alert('Geocoder failed due to: ' + status);
+            // window.alert('Geocoder failed due to: ' + status);
           }
         });
         
@@ -211,7 +211,7 @@ input = midLat + ","+midLng;
               window.alert('No results found');
             }
           } else {
-            window.alert('Geocoder failed due to: ' + status);
+            // window.alert('Geocoder failed due to: ' + status);
           }
         });
       }
@@ -325,7 +325,7 @@ startAddress.addEventListener("keyup", function(event) {
   }
 });
 //End address enter click event
-var endAddress = document.getElementById("end-address");
+/* var endAddress = document.getElementById("end-address");
 endAddress.addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
    event.preventDefault();
@@ -333,7 +333,7 @@ endAddress.addEventListener("keyup", function(event) {
    $("#end-address-modal").modal('hide');
   
   }
-});
+}); */
 
 
 // sign in auth ------------ //

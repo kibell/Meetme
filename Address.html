@@ -109,20 +109,7 @@
       <div id="floating-panel" style="margin-top: 55px; " >
             <strong>Start:</strong>
             <input type="text" id="start">
-            <!-- <select id="start">
-              <option value="chicago, il">Chicago</option>
-              <option value="st louis, mo">St Louis</option>
-              <option value="joplin, mo">Joplin, MO</option>
-              <option value="oklahoma city, ok">Oklahoma City</option>
-              <option value="amarillo, tx">Amarillo</option>
-              <option value="gallup, nm">Gallup, NM</option>
-              <option value="flagstaff, az">Flagstaff, AZ</option>
-              <option value="winona, az">Winona</option>
-              <option value="kingman, az">Kingman</option>
-              <option value="barstow, ca">Barstow</option>
-              <option value="san bernardino, ca">San Bernardino</option>
-              <option value="los angeles, ca">Los Angeles</option>
-            </select> -->
+            
             <br>
             <strong>End:</strong>
             <input type="text" id="end">
@@ -135,25 +122,16 @@
               <option value="coffee">Coffee</option>
               <option value="dinner">Dinner</option>
             </select>
-             <!-- <option value="joplin, mo">Joplin, MO</option>
-              <option value="oklahoma city, ok">Oklahoma City</option>
-              <option value="amarillo, tx">Amarillo</option>
-              <option value="gallup, nm">Gallup, NM</option>
-              <option value="flagstaff, az">Flagstaff, AZ</option>
-              <option value="winona, az">Winona</option>
-              <option value="kingman, az">Kingman</option>
-              <option value="barstow, ca">Barstow</option>
-              <option value="san bernardino, ca">San Bernardino</option>
-              <option va lue="los angeles, ca">Los Angeles</option>-->
+             
             
-            <button id="get-directions">Go!</button>
+           
           </div>
           <div id="right-panel">
             
           </div>
           <input id="inputTest"></input>
       
-          <button type="button" class="btn btn-primary" id = "findLocation">Find Location</button>
+          <button type="button" class="btn btn-primary get-directions">Find Restaurant Midway</button>
 
         </div>
   </div>
@@ -190,7 +168,7 @@
       <div class="modal-body">
         <input type="text" id="end-address"> 
       </div>
-      
+      <button class="get-directions">Go!</button>
     </div>
   </div>
 </div>
@@ -247,6 +225,7 @@ $("#btnLogOut").on('click', e=>{
 firebase.auth().onAuthStateChanged(user=>{ 
   if(user){
     console.log(user.displayName);
+    $("#floating-panel").hide();
     $("#start-address-modal").modal('show');
    
   } else{
