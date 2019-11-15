@@ -1,4 +1,4 @@
-
+console.log("lol")
 const GeoLocationURL = "https://maps.googleapis.com/maps/api/geocode/json?address=77064&key=AIzaSyCM2ChWHyTWpo5OJQFdiI-4tLDFUugVc7Q"
 let map; 
 let service;

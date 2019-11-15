@@ -1,6 +1,6 @@
 #Let's Meet
 
-> [Live Site](Put the deployed link here once you have it)
+> [Live Site]https://kibell.github.io/Meetme/
 
 ## Project Summary
 
