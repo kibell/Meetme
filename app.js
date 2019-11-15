@@ -11,7 +11,7 @@ let midLng = 0;
 let input = 0;
 let distance;
 
-$("#info-modal").modal('show');
+
 
 function initMap() {
   let directionsRenderer = new google.maps.DirectionsRenderer;
@@ -62,6 +62,8 @@ function initMap() {
 
   $(document).ready(function () {
     
+
+    // $("#start-address-modal").modal({"backdrop": "static"});
 
     //add a function that gets triggered on click of "Go" button, to get directions between start and end 
     document.getElementById('get-directions').addEventListener('click', function () {
@@ -308,6 +310,17 @@ function callback(results, status) {
 
  
 }
+
+
+//Info enter click event
+var startAddress = document.getElementById("start-address");
+startAddress.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+   event.preventDefault();
+   console.log($("#start-address").val());
+   $("#start-address-modal").modal('hide');
+  }
+});
 
 
 // sign in auth ------------ //
