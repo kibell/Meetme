@@ -13,13 +13,14 @@ let distance;
 
 
 
+
 function initMap() {
   let directionsRenderer = new google.maps.DirectionsRenderer;
   let directionsService = new google.maps.DirectionsService;
   let geocoder = new google.maps.Geocoder();
   let infowindow = new google.maps.InfoWindow;
-  let start = document.getElementById('start').value;
-  let end = document.getElementById('end').value;
+  let start = document.getElementById('start-address').value;
+  let end = document.getElementById('end-address').value;
 
 
 //Rendering map on page
@@ -39,8 +40,8 @@ function initMap() {
 
   
   function calculateAndDisplayRoute(directionsService, directionsRenderer) {
-    let start = document.getElementById('start').value;
-    let end = document.getElementById('end').value;
+    let start = document.getElementById('start-address').value;
+    let end = document.getElementById('end-address').value;
     
 
     directionsService.route({
@@ -73,8 +74,8 @@ function initMap() {
 
       function geocodeAddress(geocoder, resultsMap) {
        // let address = document.getElementById('inputTest').value;
-       let start = document.getElementById('start').value;
-       let end = document.getElementById('end').value;
+       let start = document.getElementById('start-address').value;
+       let end = document.getElementById('end-address').value;
 
        //get lat long for start address 
        console.log("Start in function" + start);
@@ -312,13 +313,25 @@ function callback(results, status) {
 }
 
 
-//Info enter click event
+//start address enter click event
 var startAddress = document.getElementById("start-address");
 startAddress.addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
    event.preventDefault();
    console.log($("#start-address").val());
+   
    $("#start-address-modal").modal('hide');
+   $("#end-address-modal").modal('show');
+  }
+});
+//End address enter click event
+var endAddress = document.getElementById("end-address");
+endAddress.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+   event.preventDefault();
+   console.log($("#end-address").val());
+   $("#end-address-modal").modal('hide');
+  
   }
 });
 
