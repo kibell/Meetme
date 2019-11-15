@@ -11,6 +11,8 @@ let midLng = 0;
 let input = 0;
 let distance;
 
+$("#info-modal").modal('show');
+
 function initMap() {
   let directionsRenderer = new google.maps.DirectionsRenderer;
   let directionsService = new google.maps.DirectionsService;
