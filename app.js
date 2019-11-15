@@ -241,10 +241,14 @@ function callback(results, status) {
     console.log("Nearby search : " + results) ;
     for (var i = 0; i < results.length; i++) {
       createMarker(results[i]);
-    let newP = $('<p>')
-    newP.text(results[i].name)
+    let newP = $('<p>');
+    let newImg = $('<img>');
 
-    $('#right-panel').append(newP);
+    newP.text(results[i].name);
+    newImg.attr('src', results[i].photos[0].getUrl({maxWidth: 70, maxHeight: 70}));
+
+    $('#right-panel').append(newP, newImg);
+
 
     
     
