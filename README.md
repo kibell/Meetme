@@ -9,9 +9,9 @@
 ## Developers
 
 - Developer 1: Dipti Katkar
-  - Portfolio
-  - Github
-  - LinkedIn
+  - https://github.com/dkaj1990/Bootstrap-Portfolio
+  - https://github.com/dkaj1990
+  - https://www.linkedin.com/in/diptikatkar/
 - Developer 2: Kitrick Bell
   - Portfolio
   - Github
@@ -22,25 +22,27 @@
 
 - Place various screens of your app here after they have been built
 
+
 ## Tech Stack
 
-- What languages is it written with
-- What libraries are used
-- Update at the end of the project
+- HTML5,CSS,JS
+- Bootstrap, jQuery
+
 
 ## APIs
 
-- List the two apis
-- Update it has the project evolves
-- make sure its accurate at the end
+- Goole Directions API
+- Google Places API
+- Google Geocoder API
 
 ## MVP
 
-- List the Must Have Features
+- Calculates distance between two locations and lists places that are midways. 
 
 ## Stretch Goals
 
-- What you will try to accomplish after MVP
+- Ability to chat on website to finalize destination
+- Finding location that's midway for multiple locations(2+)
 
 ## Future Development
 
@@ -49,4 +51,4 @@
 
 ## Credits/Resources
 
-- Any credits you should list to resources you used
+- Maps & Places powered by Google
