@@ -224,7 +224,7 @@ $("#btnLogOut").on('click', e=>{
 })
 firebase.auth().onAuthStateChanged(user=>{ 
   if(user){
-    console.log(user.displayName);
+    console.log("Username: "+user.displayName);
     $("#floating-panel").hide();
     $("#start-address-modal").modal('show');
    
