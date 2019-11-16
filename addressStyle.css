@@ -118,3 +118,40 @@ p{
 .newImg{
   width: 100%;
 }
+
+#start-address-modal, #end-address-modal, #activity-modal{
+ opacity: .9;
+  background: linear-gradient(to right, blue, orange);
+  color:blue ;
+  text-align: center;
+  
+}
+
+
+#start-address, #end-address{
+  width:100%;
+  margin-top: 15px;
+}
+.modal-title{
+  text-align: center;
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 50px;
+  font-family: cursive;
+ height: 300px;
+  
+}
+
+.modal-header, .modal-body{
+height:170px;
+background: rgba(255, 189, 66, 0.5);
+
+
+}
+
+#category{
+  width: 100%;
+  height: 50px;
+  font-weight: 300px;
+}
