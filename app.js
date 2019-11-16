@@ -68,7 +68,7 @@ function initMap() {
 
     //add a function that gets triggered on click of "Go" button, to get directions between start and end 
     $('.get-directions').on('click', function () {
-      $("#end-address-modal").modal('hide');
+      $("#activity-modal").modal('hide');
       calculateAndDisplayRoute(directionsService, directionsRenderer);
       geocodeAddress(geocoder, map);
 
@@ -225,7 +225,7 @@ input = midLat + ","+midLng;
  var request = {
   location: center,
   radius: distance,
-  types:['restaurant', "food"]
+  types:[category,category]
 };
 var service = new google.maps.places.PlacesService(map);
 
@@ -241,13 +241,28 @@ function callback(results, status) {
     console.log("Nearby search : " + results) ;
     for (var i = 0; i < 5; i++) {
       createMarker(results[i]);
-    let newP = $('<p>')
-    newP.text(results[i].name)
-    newP.attr('src', 'results[i].photo')
+     let newD = $('<hr>')
+     newD.addClass("bold");
+    let newP = $('<p>');
+    newP.addClass('name');
+    let newVincity = $('<p>');
+    let newImg = $('<img>');
+    newImg.addClass("newImg");
+    let newRate =  $('<p>');
+    let newOpen = $('<p>');
+    newP.text(results[i].name);
+    newVincity.text("Address: " + results[i].vicinity);
+    newRate.text("Rating: " + results[i].rating)
+    newImg.attr('src', results[i].photos[0].getUrl({maxWidth: 250, maxHeight: 200}));
+    // newOpen.text("Are we Open?  " + results[i].opening_hours.open_now)
+   console.log ("opening" + results[i].opening_hours.periods)
+    $('#right-panel').append(newP, newImg,newVincity, newRate,newOpen,newD );
 
-
-    $('#right-panel').append(newP);
-
+        if(results[i].opening_hours.open_now == true){
+          newOpen.text("Are we Open?  " + "Yes We Are!")
+        }else{
+          newOpen.text("Are we Open?  " + "No we are not, Sorry")
+        }
     
     
     }
@@ -327,12 +342,16 @@ startAddress.addEventListener("keyup", function(event) {
   }
 });
 //End address enter click event
-/* var endAddress = document.getElementById("end-address");
+ var endAddress = document.getElementById("end-address");
 endAddress.addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
    event.preventDefault();
    console.log($("#end-address").val());
    $("#end-address-modal").modal('hide');
+   $('#activity-modal').modal('show');
   
   }
-}); */
+}); 
+
+var endAddress = document.getElementById("activity");
+

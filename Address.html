@@ -104,7 +104,7 @@
                   
 
 
-    <div class="col-md-6" style="background: aliceblue;margin-bottom: 100px; border-style:solid; border-width: 10px; border-color: blue;">
+    <div class="col-md-6" >
        
       <div id="floating-panel" style="margin-top: 55px; " >
             <strong>Start:</strong>
@@ -117,22 +117,19 @@
             <br>
             <strong>Category</strong>
             <!--<input type="text" id="end">-->
-            <select id="category">
-              <option value="lunch">Lunch</option>
-              <option value="coffee">Coffee</option>
-              <option value="dinner">Dinner</option>
-            </select>
+           
              
             
            
           </div>
-          <div id="right-panel">
+          <div style="background: aliceblue; opacity: .9;" id="right-panel">
             
           </div>
-          <input id="inputTest"></input>
+         
       
-          <button type="button" class="btn btn-primary get-directions">Find Restaurant Midway</button>
-
+          <button type="button" class="btn btn-primary get-directions">Find  Midpoint</button>
+          
+          
         </div>
   </div>
 </div>
@@ -168,12 +165,33 @@
       <div class="modal-body">
         <input type="text" id="end-address"> 
       </div>
+     
+    </div>
+  </div>
+</div>
+<!--  start activity Modal -->
+<div class="modal fade" id="activity-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">What do you want to do today?</h5>
+        <br>
+      </div>
+      <div class="modal-body">
+        <select id="category">
+            <option value="aquarium">Aquarium</option>
+          <option value="restaurant">Restaurant</option>
+          <option value="cafe">Cafe</option>
+          <option value="movie_theater">Movies</option>
+          <option value="shopping_mall">Mall</option>
+          <option value="zoo">Zoo</option>
+
+        </select>
+      </div>
       <button class="get-directions">Go!</button>
     </div>
   </div>
 </div>
-
-
 
 <script src="app.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

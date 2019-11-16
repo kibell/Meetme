@@ -13,6 +13,7 @@ opacity: 1;
 background: linear-gradient(to right, white, orange);
 opacity: .9;
 
+
 }
 .lead{
     opacity: 1;
@@ -97,3 +98,23 @@ height: 800px;
 
   }
 
+.bold{
+  border: 3px solid black;
+  width: 100%;
+}
+
+.name{
+font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+font-size: 20px;
+text-align: center;
+
+}
+
+p{
+  font-size: large;
+  font-weight: bold;
+}
+
+.newImg{
+  width: 100%;
+}
