@@ -24,15 +24,7 @@ opacity: .9;
 
 
 .sign{
-
-    color: white;   
-    font-family: 'Jomolhari', serif;
-    text-align: center;
-    margin-top: 50px;
-    font-weight: bolder;
-    border-style: solid;
-    background:linear-gradient(to right,blue, black ) ;
-
+    color: blanchedalmond;
 }
 
 .text-muted{
@@ -40,3 +32,11 @@ opacity: .9;
 }
 
 
+p{
+    font-size: large;
+    font-weight: bold;
+  }
+
+  h3, .d-none{
+    font-family: 'Fredoka One', cursive;
+  }
