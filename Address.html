@@ -232,7 +232,6 @@ firebase.auth().onAuthStateChanged(user=>{
     window.location = 'index.html'
   }
 })
-
   let chat = "";
   let chatlog = 0; 
   $("#send").on("click", function(event) {
@@ -277,9 +276,6 @@ let newRow = $('<p>')
 }, function(errorObject) {
 console.log("The read failed: " + errorObject.code);
 });
-
-
-
 </script>
 
 </body>
