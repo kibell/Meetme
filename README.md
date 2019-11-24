@@ -21,7 +21,7 @@
 ## Animated Gifs/Pictures of App
 
 - Place various screens of your app here after they have been built
-
+![](name-of-giphy.gif)
 
 ## Tech Stack
 
